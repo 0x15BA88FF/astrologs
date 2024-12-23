@@ -1,0 +1,44 @@
+---
+import { getCollection, getEntryBySlug } from "astro:content";
+
+import OutlineHeading from "@/components/OutlineHeading.jsx";
+
+const { slug } = Astro.params;
+
+export async function getStaticPaths() {
+    const posts = await getCollection("blog");
+    return posts.map(post => ({ params: { slug: post.slug } }));
+}
+
+const post = await getEntryBySlug("blog", slug);
+const { headings } = await post.render();
+
+const nestHeadings = (headings) => {
+    const nested = [];
+    const stack = [{ depth: 0, children: nested }];
+
+    headings.forEach((heading) => {
+        while (stack[stack.length - 1].depth >= heading.depth) {
+            stack.pop();
+        }
+        const parent = stack[stack.length - 1];
+        const node = { ...heading, children: [] };
+        parent.children.push(node);
+        stack.push(node);
+    });
+
+    return nested;
+};
+
+const nestedHeadings = nestHeadings(headings);
+---
+
+<div id="sidebar" class="hidden sticky top-0 z-10 h-screen min-w-80 bg-surface-800 p-4 overflow-y-auto">
+    <ul>
+        {nestedHeadings.length > 0 ? nestedHeadings.map(heading => (
+            <OutlineHeading key={heading.slug} heading={heading} client:visible />
+        )) : (
+            <li>No headings available</li>
+        )}
+    </ul>
+</div>

@@ -1,0 +1,57 @@
+---
+import moment from "moment";
+import { getCollection, getEntryBySlug } from "astro:content";
+
+import { Clock, Clock5 } from "lucide-react"
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Badge from "@/components/Badge.astro";
+
+const { slug } = Astro.params;
+
+export async function getStaticPaths() {
+    const posts = await getCollection("blog");
+    return posts.map(post => ({params: { slug: post.slug }}));
+}
+
+const post = await getEntryBySlug("blog", slug);
+const { Content } = await post.render();
+
+const dateCreated = moment(post.data.date_created, "YYYY-MM-DD HH:mm");
+const dateModified = moment(post.data.date_modified, "YYYY-MM-DD HH:mm");
+
+const formatDateCreated = dateCreated.format("DD MMMM, YYYY [at] HH:mm");
+const formatDateModified = dateModified.format("DD MMMM, YYYY [at] HH:mm");
+---
+
+<BaseLayout>
+    <div>
+        {post.data.banner_image &&
+            <img src={post.data.banner_image} alt={post.data.banner_alt} class="aspect-[2.9] rounded-2xl" />
+        }
+        <table class="mt-4 w-full">
+            <tbody>
+            <tr class="mt-4 text-sm font-semibold text-surface-400">
+                <td class="py-2 flex items-center gap-2"><Clock5 size={20} /><p>Created</p></td>
+                <td><p class="text-primary-700">{formatDateCreated}</p></td>
+            </tr>
+            <tr class="mt-4 text-sm font-semibold text-surface-400">
+                <td class="py-2 flex items-center gap-2"><Clock5 size={20} /><p>Modified</p></td>
+                <td><p class="text-primary-700">{formatDateModified}</p></td>
+            </tr>
+            </tbody>
+        </table>
+        <h1 class="mt-4 text-4xl font-bold">{post.data.title}</h1>
+        <p class="mt-4">{post.data.description}</p>
+        <div class="flex gap-2 mt-4">
+            {post.data.draft && (
+                <Badge className="text-yellow-600 dark:text-yellow-400 bg-yellow-100 dark:bg-yellow-900">draft</Badge>
+            )}
+            {post.data.tags?.map(tag => (
+                <Badge className="text-primary-400 bg-primary-900">{tag}</Badge>)
+            )}
+        </div>
+    </div>
+    <div class="min-w-full w-full mt-10 prose break-word">
+        <Content />
+    </div>
+</BaseLayout>

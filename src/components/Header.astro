@@ -1,0 +1,11 @@
+---
+import Breadcrumb from '@/components/Breadcrumb.astro';
+import ThemeToggle from '@/components/ThemeToggleButton.astro';
+
+const currentUrl = Astro.url;
+---
+
+<div class="flex flex-grow items-center justify-between">
+    <Breadcrumb route={currentUrl.pathname} />
+    <ThemeToggle />
+</div>
