@@ -75,7 +75,7 @@
     --primary-950: #031711;
 }
 
-* { @apply font-mono; }
+* { @apply font-mono outline-none; }
 
 .heading-anchor { @apply relative no-underline after:content-["#"]; }
 .heading-anchor::after { @apply absolute -right-8 text-transparent; }
@@ -83,13 +83,20 @@
 
 section.footnotes { @apply mt-40 border-t-[1px] border-surface-500; }
 
+.animate-fade-out { @apply opacity-0 pointer-events-none; }
+.animate-offscreen-up { @apply transform -translate-y-full pointer-events-none; }
+.animate-offscreen-left { @apply transform -translate-x-full pointer-events-none; }
+
 /* Prose */
 
 .prose { @apply prose-neutral }
+.prose-sm { @apply prose-neutral }
 
 /* Themeing */
 
 html.dark .prose { @apply prose-invert }
+html.dark .prose-sm { @apply prose-invert }
+
 html.dark .astro-code,
 html.dark .astro-code span {
     color: var(--shiki-dark) !important;

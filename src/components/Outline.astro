@@ -6,11 +6,11 @@ import OutlineHeading from "@/components/OutlineHeading.jsx";
 const { slug } = Astro.params;
 
 export async function getStaticPaths() {
-    const posts = await getCollection("blog");
+    const posts = await getCollection("posts");
     return posts.map(post => ({ params: { slug: post.slug } }));
 }
 
-const post = await getEntryBySlug("blog", slug);
+const post = await getEntryBySlug("posts", slug);
 const { headings } = await post.render();
 
 const nestHeadings = (headings) => {
@@ -33,7 +33,7 @@ const nestHeadings = (headings) => {
 const nestedHeadings = nestHeadings(headings);
 ---
 
-<div id="sidebar" class="hidden sticky top-0 z-10 h-screen min-w-80 bg-surface-800 p-4 overflow-y-auto">
+<div>
     <ul>
         {nestedHeadings.length > 0 ? nestedHeadings.map(heading => (
             <OutlineHeading key={heading.slug} heading={heading} client:visible />

@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+
+import Badge from "@/components/Badge.astro";
+
+const maxTagsCount = 3;
+const { tag, max } = Astro.props;
+const posts = await getCollection("posts", ({ data }) => data.tags?.includes(tag));
+---
+
+<ul class="flex flex-col mt-4">
+    {posts.length > 0? posts.slice(0, max).map(post => (
+        <li class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 rounded hover:bg-surface-800">
+            <a href={`/maze/posts/${post.slug}`} class="md:max-w-8/12 text-lg font-bold truncate">
+                {post.data.title}
+            </a>
+            <div class="flex gap-2 overflow-hidden">
+                {post.data.tags?.filter(text => text != tag ).slice(0, maxTagsCount).map(tag => (
+                    <Badge tag={tag} className="text-primary-400 bg-primary-900" />)
+                )}
+                {post.data.tags?.length >= maxTagsCount && (<p>..</p>)}
+            </div>
+        </li>
+    )) : (
+        <li>
+            <p class="mb-4 p-8 font-bold text-center">No Posts Found.</p>
+        </li>
+    )}
+</ul>

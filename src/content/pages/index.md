@@ -1,14 +1,11 @@
 ---
-title: "Test Blog 01"
+title: "Index"
 description: "nothing here"
 tags: ["daily", "wednesday"]
 date_created: "2024-12-21 15:30"
 date_modified: "2024-12-16 02:34"
 draft: true
-banner_image: "https://cdn.dribbble.com/userupload/11507678/file/original-38d357eb2ae02b62d300c9fdb10769fa.jpg?resize=1600x543&vertical=center"
-banner_alt: "Cyber Security"
 cssclasses: [""]
-# layout: "MarkdownPostLayout"
 ---
 # This is a Heading h1
 
@@ -20,7 +17,7 @@ cssclasses: [""]
 
 ##### This is a Heading h5
 
-###### This is a Heading h6
+###### This is a relatively long Heading h6
 
 🎉
 Press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy text.

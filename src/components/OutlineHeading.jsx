@@ -1,16 +1,15 @@
 import { useState } from "react";
-import { ChevronRight, ChevronDown } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 const OutlineHeading = ({ heading }) => {
     const [isExpanded, setIsExpanded] = useState(true);
-    console.log(isExpanded)
 
     return (
         <li>
             <div className="flex items-center gap-2 w-full px-2 py-1 hover:bg-surface-700 rounded" style={{ paddingLeft: `${1 * heading.depth}rem` }}>
                 {heading.children.length > 0? (
                     <button onClick={_ => setIsExpanded(!isExpanded)} className="flex items-center -ml-3">
-                        {isExpanded ? <ChevronDown size={20} /> : <ChevronRight size={20} />}
+                        <ChevronRight size={20} className={ `transition-all duration-200 ${isExpanded && "rotate-90"}` } />
                     </button>
                 ) : (
                     <div className="mr-2" />

@@ -1,0 +1,35 @@
+---
+import { getCollection, getEntryBySlug } from "astro:content";
+
+import ContentLayout from "@/layouts/ContentLayout.astro";
+import TaggedPostsList from "@/components/TaggedPostsList.astro";
+
+export async function getStaticPaths() {
+    const allPosts = Object.values(import.meta.glob('@/content/posts/*.md', { eager: true }));
+    const tags = [...new Set(allPosts.map((post: any) => post.frontmatter.tags).flat())];
+    return tags.map(tag => ({ params: { slug: tag } }));
+}
+
+const { slug } = Astro.params;
+const tagDetails = await getEntryBySlug("tags", slug);
+const { Content } = await tagDetails?.render() || { Content: undefined };
+
+const tag = {
+    slug: slug,
+    title: tagDetails?.data.title || slug,
+    description: tagDetails?.data.description || "No Description Found",
+    cssclasses: tagDetails?.data.cssclasses || "",
+};
+---
+
+<ContentLayout title={`Tag: ${tag.title} | 0x15BA88FF Maze`} cssclasses={tag.cssclasses}>
+    <h1 class="text-2xl md:text-4xl font-bold">{tag.title}</h1>
+    <p class="py-4">{tag.description}</p>
+    {Content &&
+        <div class="pt-8 prose-sm md:prose">
+            <Content />
+        </div>
+    }
+    <hr class="mt-8 border-surface-500"/>
+    <TaggedPostsList tag={tag.slug} />
+</ContentLayout>

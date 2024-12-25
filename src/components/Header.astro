@@ -1,11 +1,17 @@
 ---
 import Breadcrumb from '@/components/Breadcrumb.astro';
+import SearchButton from '@/components/SearchModalButton.astro';
 import ThemeToggle from '@/components/ThemeToggleButton.astro';
 
 const currentUrl = Astro.url;
 ---
 
-<div class="flex flex-grow items-center justify-between">
-    <Breadcrumb route={currentUrl.pathname} />
-    <ThemeToggle />
+<div class="sticky top-0 z-10 py-4 flex items-center justify-between gap-4 py-2 bg-surface-900">
+    <slot />
+    <Breadcrumb route={currentUrl.pathname} className="hidden sm:flex" />
+    <div class="flex-grow"/>
+    <div class="flex items-center gap-2">
+        <SearchButton />
+        <ThemeToggle />
+    </div>
 </div>

@@ -1,44 +1,11 @@
 ---
-import { getCollection, getEntryBySlug } from "astro:content";
-
-import OutlineHeading from "@/components/OutlineHeading.jsx";
-
-const { slug } = Astro.params;
-
-export async function getStaticPaths() {
-    const posts = await getCollection("blog");
-    return posts.map(post => ({ params: { slug: post.slug } }));
-}
-
-const post = await getEntryBySlug("blog", slug);
-const { headings } = await post.render();
-
-const nestHeadings = (headings) => {
-    const nested = [];
-    const stack = [{ depth: 0, children: nested }];
-
-    headings.forEach((heading) => {
-        while (stack[stack.length - 1].depth >= heading.depth) {
-            stack.pop();
-        }
-        const parent = stack[stack.length - 1];
-        const node = { ...heading, children: [] };
-        parent.children.push(node);
-        stack.push(node);
-    });
-
-    return nested;
-};
-
-const nestedHeadings = nestHeadings(headings);
+import Outline from "@/components/Outline.astro";
 ---
 
-<div id="sidebar" class="hidden sticky top-0 z-10 h-screen min-w-80 bg-surface-800 p-4 overflow-y-auto">
-    <ul>
-        {nestedHeadings.length > 0 ? nestedHeadings.map(heading => (
-            <OutlineHeading key={heading.slug} heading={heading} client:visible />
-        )) : (
-            <li>No headings available</li>
-        )}
-    </ul>
+<div id="sidebar-backdrop" class="fixed top-0 left-0 z-40 w-screen h-screen bg-surface-900 opacity-90 backdrop-blur transition-all duration-500 md:opacity-0 md:pointer-events-none animate-fade-out" />
+
+<div id="sidebar" class="fixed lg:sticky top-0 z-50 h-screen w-80 md:w-0 p-2 overflow-x-hidden transition-all duration-500 animate-offscreen-left">
+    <div id="sidebar" class="w-fulll h-full bg-surface-800 p-4 overflow-y-auto rounded">
+        <Outline />
+    </div>
 </div>

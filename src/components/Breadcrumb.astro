@@ -1,26 +1,28 @@
 ---
-import { ChevronRight } from "lucide-react"
+import { ChevronRight } from "lucide-react";
 
-const { route } = Astro.props;
-if (!route.startsWith("/")) { throw new Error("Route must start with a /") }
+const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
-const capitalize = (str) => { return str.charAt(0).toUpperCase() + str.slice(1) }
-
-const segments = route.split("/").filter(Boolean);
-const breadcrumbs = segments.map((segment, index) => {
-    return {
+const generateBreadcrumbs = (route) => {
+    const segments = route.split("/").filter(Boolean);
+    const breadcrumbs = segments.map((segment, index) => ({
         label: capitalize(segment.replace(/-/g, " ")),
         path: "/" + segments.slice(0, index + 1).join("/"),
-    };
-});
+    }));
+    breadcrumbs.unshift({ label: "Home", path: "/" });
+    return breadcrumbs;
+};
 
-breadcrumbs.unshift({ label: "Home", path: "/" });
+const { route, className } = Astro.props;
+const breadcrumbs = generateBreadcrumbs(route);
 ---
 
-<div class="flex items-center gap-2">
+<div class={`${className} flex items-center gap-2`}>
     {breadcrumbs.map((breadcrumb, index) => (
         <>
-            <a href={breadcrumb.path} class={`${index >= breadcrumbs.length - 1 && "text-surface-50" || "text-surface-400"} hover:text-primary-400`}>{breadcrumb.label}</a>
+            <a href={breadcrumb.path} class={`${ index === breadcrumbs.length - 1 ? "text-surface-50" : "text-surface-400 hover:text-primary-400" }`}>
+                {breadcrumb.label}
+            </a>
             {index < breadcrumbs.length - 1 && <ChevronRight />}
         </>
     ))}

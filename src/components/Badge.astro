@@ -1,5 +1,5 @@
 ---
-const { href, className } = Astro.props;
+const { tag, className } = Astro.props;
 ---
 
-<a href={href} class=`${className} px-3 rounded-full`><slot /></a>
+<a href={`/maze/tags/${tag?.split(" ").join("-")}`} class={`${className} px-3 rounded-full`}>{tag}</a>

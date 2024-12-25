@@ -1,5 +1,19 @@
 ---
+import { Rss } from "lucide-react";
+
+const year = new Date().getFullYear();
 ---
 
-<div>
-</div>
+<footer class="flex flex-col gap-4">
+    <hr class="my-4 border-surface-500"/>
+    <div class="p-4">
+        <p>Created By <a href="https://github.com/0x15BA88FF" class="text-primary-400">0x15BA88FF</a> &copy; {year}</p>
+        <div class="flex gap-4 text-primary-400 hover:text-primary-500">
+            <a href="https://github.com/0x15BA88FF">Github</a>
+            <a href="https://x.com/0x15BA88FF">Twitter</a>
+            <a href="https://discord.gg/g5MXQApC">Discord</a>
+            <div class="flex-grow" />
+            <a href="/maze/rss.xml" target="_blank" rel="noopener noreferrer"><Rss /></a>
+        </div>
+    </div>
+</footer>

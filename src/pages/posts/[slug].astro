@@ -1,0 +1,56 @@
+---
+import moment from "moment";
+import { getCollection, getEntryBySlug } from "astro:content";
+
+import BlogLayout from "@/layouts/BlogLayout.astro";
+import { Clock, Clock5 } from "lucide-react";
+import Badge from "@/components/Badge.astro";
+
+export async function getStaticPaths() {
+    const posts = await getCollection("posts");
+    return posts.map(post => ({ params: { slug: post.slug } }));
+}
+
+const { slug } = Astro.params;
+const post = await getEntryBySlug("posts", slug);
+const { Content } = await post.render();
+
+const dateCreated = moment(post.data.date_created, "YYYY-MM-DD HH:mm");
+const dateModified = moment(post.data.date_modified, "YYYY-MM-DD HH:mm");
+
+const formatDateCreated = dateCreated.format("DD/MM/YYYY HH:mm");
+const formatDateModified = dateModified.format("DD/MM/YYYY HH:mm");
+---
+
+<BlogLayout title={`${post.data.title} | 0x15BA88FF Maze`} cssclasses={post.data.cssclasses}>
+    <div>
+        {post.data.banner.image &&
+            <img src={post.data.banner.image} alt={post.data.banner.alt} class="aspect-[2.9] mb-4 rounded-2xl" />
+        }
+        <h1 class="mb-4 text-2xl md:text-4xl font-bold">{post.data.title}</h1>
+        <p class="mt-4">{post.data.description}</p>
+        <table class="my-4 w-full">
+            <tbody>
+                <tr>
+                    <td class="py-2 flex items-center gap-2"><Clock5 size={20} /><p>Created</p></td>
+                    <td><p class="text-primary-700">{formatDateCreated}</p></td>
+                </tr>
+                <tr>
+                    <td class="py-2 flex items-center gap-2"><Clock5 size={20} /><p>Modified</p></td>
+                    <td><p class="text-primary-700">{formatDateModified}</p></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="flex gap-2 flex-wrap">
+            {post.data.draft && (
+                <Badge tag="draft" className="text-yellow-600 dark:text-yellow-400 bg-yellow-100 dark:bg-yellow-900" />
+            )}
+            {post.data.tags?.map(tag => (
+                <Badge tag={tag} className="text-primary-400 bg-primary-900" />)
+            )}
+        </div>
+    </div>
+    <div class="min-w-full w-full mt-8 prose-sm md:prose break-word">
+        <Content />
+    </div>
+</BlogLayout>
