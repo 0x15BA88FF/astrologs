@@ -6,7 +6,7 @@ import ThemeToggle from '@/components/ThemeToggleButton.astro';
 const currentUrl = Astro.url;
 ---
 
-<div class="sticky top-0 z-10 py-4 flex items-center justify-between gap-4 py-2 bg-surface-900">
+<div class="sticky top-0 z-10 py-2 flex items-center justify-between gap-4 bg-surface-900">
     <slot />
     <Breadcrumb route={currentUrl.pathname} className="hidden sm:flex" />
     <div class="flex-grow"/>
