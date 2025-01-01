@@ -1,0 +1,25 @@
+---
+import { ChevronRight } from "lucide-react";
+import Badge from "@/components/Badge.astro";
+
+const maxTags = 3;
+const { slug, title, description, tags } = Astro.props;
+---
+
+<div class="flex items-center justify-between gap-4 p-4 border-[1px] border-surface-600 rounded hover:bg-surface-800">
+    <div class="flex flex-col flex-grow gap-2">
+        <a href={`/logs/posts/${slug}`}>
+            <p class="text-lg font-semibold truncate">{title}</p>
+            <p class="truncate">{description}</p>
+        </a>
+        <div class="flex gap-2 overflow-hidden">
+            {tags?.slice(0, maxTags).map(tag => (
+                <Badge tag={tag} className="text-primary-400 bg-primary-900" />
+            ))}
+            {tags?.length >= maxTags && (
+                <p>..</p>
+            )}
+        </div>
+    </div>
+    <ChevronRight />
+</div>

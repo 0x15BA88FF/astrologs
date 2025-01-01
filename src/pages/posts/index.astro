@@ -2,31 +2,24 @@
 import { getCollection } from "astro:content";
 
 import ContentLayout from "@/layouts/ContentLayout.astro";
-import Badge from "@/components/Badge.astro";
+import PostCard from "@/components/PostCard.astro";
 
-const maxTagsCount = 3;
 const posts = await getCollection("posts");
 ---
 
 <ContentLayout title="All Posts | 0x15BA88FF Logs">
     <h1 class="text-2xl md:text-4xl font-bold">All Posts Index</h1>
-    <p class="mt-8 text-lg text-surface-300">
-        Explore an index of all posts within the logs. 
-    </p>
-    <hr class="mt-8 border-surface-500"/>
+    <p class="mt-8 text-lg text-surface-300">Explore an index of all posts within the logs.</p>
+    <hr class="mt-8 border-surface-500" />
     <ul class="my-4">
-        {posts.map(post => (
-            <li class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 rounded hover:bg-surface-800">
-                <a href={`/logs/posts/${post.slug}`} class="md:max-w-8/12 text-lg font-bold truncate">
-                    {post.data.title}
-                </a>
-                <div class="flex gap-2 overflow-hidden">
-                    {post.data.tags?.slice(0, maxTagsCount).map(tag => (
-                        <Badge tag={tag} className="text-primary-400 bg-primary-900" />)
-                    )}
-                    {post.data.tags?.length >= maxTagsCount && (<p>..</p>)}
-                </div>
+        {posts.length > 0 ? posts.map(post => (
+            <li>
+                <PostCard slug={post.slug} title={post.data.title} description={post.data.description} tags={post.data.tags} />
             </li>
-        ))}
+        )) : (
+            <li>
+                <p class="mb-4 p-8 font-bold text-center">No Posts Found.</p>
+            </li>
+        )}
     </ul>
 </ContentLayout>
