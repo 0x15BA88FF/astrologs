@@ -14,7 +14,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 export default defineConfig({
     site: "https://0x15ba88ff.github.io",
-    base: "/",
+    base: "/logs",
     markdown: {
         shikiConfig: {
             wrap: false,

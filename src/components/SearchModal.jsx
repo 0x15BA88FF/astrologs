@@ -35,7 +35,7 @@ const SearchModal = () => {
                     {filteredPosts.length > 0 ? (
                         <div className="max-h-60 flex flex-col gap-2 p-2 bg-surface-800 border-2 border-surface-700 rounded shadow-3xl">
                             {filteredPosts.map(post => (
-                                <a href={`/posts/${post.slug}`} key={post.slug} className="p-4 rounded-md hover:bg-surface-700 focus:bg-primary-800">
+                                <a href={`/logs/posts/${post.slug}`} key={post.slug} className="p-4 rounded-md hover:bg-surface-700 focus:bg-primary-800">
                                     <h3 className="text-lg font-bold">{post.data.title}</h3>
                                     <p className="text-sm">
                                         {post.data.description || "No description available."}
