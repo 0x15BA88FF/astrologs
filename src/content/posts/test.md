@@ -8,10 +8,12 @@ draft: true
 banner:
     image: "https://cdn.dribbble.com/userupload/11507678/file/original-38d357eb2ae02b62d300c9fdb10769fa.jpg?resize=1600x543&vertical=center"
     alt: "Cyber Security"
-cssclasses: [""]
+cssclasses: []
 # layout: "MarkdownPostLayout"
 ---
 # This is a Heading h1
+
+<marque>Hello world</marque>
 
 ## this is a Heading h2
 
@@ -75,9 +77,16 @@ www.example.com, https://example.com, and contact@example.com.
 
 ## Blockquotes
 
-> **!NOTE**
 > Markdown is a lightweight markup language with plain-text-formatting syntax, created in 2004 by John Gruber with Aaron Swartz.
 > > Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+
+> [!note] This is a _non-collapsible_ callout
+>
+> Some content is displayed directly!
+> Some content is displayed directly!
+
+> [!WARNING]- This is a **collapsible** callout
+> Some content shown after opening!
 
 ## Tables
 
@@ -96,7 +105,7 @@ www.example.com, https://example.com, and contact@example.com.
 
 ## Blocks of code
 
-```ts
+```ts title="example.ts"
 // Using 'typeof' to infer types
 const person = { name: "Alice", age: 30 };
 type PersonType = typeof person;  // { name: string; age: number }
@@ -193,6 +202,14 @@ function combine<T, U>(first: T, second: U): [T, U] {
    .process(await read('example.md'))
 ```
 
+```mermaid
+graph TD;
+A-->B;
+A-->C;
+B-->D;
+C-->D;
+```
+
 ### Inline code
 
 This web site is using `markedjs/marked`.
@@ -216,3 +233,8 @@ $$
 
 > You can find more information about **LaTeX** mathematical expressions [here](http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference).
 
+lorem␠␠
+ipsum
+
+lorem\
+ipsum

@@ -4,9 +4,7 @@
         ".astro/types.d.ts",
         "**/*"
     ],
-    "exclude": [
-        "dist"
-    ],
+    "exclude": ["dist", "node_modules", ".local"],
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {

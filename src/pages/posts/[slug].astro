@@ -3,6 +3,7 @@ import moment from "moment";
 import { getCollection, getEntryBySlug } from "astro:content";
 
 import BlogLayout from "@/layouts/BlogLayout.astro";
+
 import { Clock, Clock5 } from "lucide-react";
 import Badge from "@/components/Badge.astro";
 
@@ -24,7 +25,7 @@ const formatDateModified = dateModified.format("DD/MM/YYYY HH:mm");
 
 <BlogLayout title={`${post.data.title} | 0x15BA88FF Maze`} cssclasses={post.data.cssclasses}>
     <div>
-        {post.data.banner.image &&
+        {post.data.banner?.image &&
             <img src={post.data.banner.image} alt={post.data.banner.alt} class="aspect-[2.9] mb-4 rounded-2xl" />
         }
         <h1 class="mb-4 text-2xl md:text-4xl font-bold">{post.data.title}</h1>
@@ -50,7 +51,7 @@ const formatDateModified = dateModified.format("DD/MM/YYYY HH:mm");
             )}
         </div>
     </div>
-    <div class="min-w-full w-full mt-8 prose-sm md:prose break-word">
+    <div class="min-w-full w-full mt-8 prose">
         <Content />
     </div>
 </BlogLayout>

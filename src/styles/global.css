@@ -1,4 +1,5 @@
 @import "katex/dist/katex.min.css";
+@import "rehype-callouts/theme/obsidian";
 
 :root {
     --surface-50: rgb(10 10 10);
@@ -12,18 +13,6 @@
     --surface-800: rgb(229 229 229);
     --surface-900: rgb(245 245 245);
     --surface-950: rgb(250 250 250);
-
-    --secondary-50: #050514;
-    --secondary-100: #0a0a29;
-    --secondary-200: #141452;
-    --secondary-300: #1f1f7a;
-    --secondary-400: #2929a3;
-    --secondary-500: #3333cc;
-    --secondary-600: #5c5cd6;
-    --secondary-700: #8585e0;
-    --secondary-800: #adadeb;
-    --secondary-900: #d6d6f5;
-    --secondary-950: #ebebfa;
 
     --primary-50: #031711;
     --primary-100: #052e22;
@@ -50,18 +39,6 @@
     --surface-900: rgb(23 23 23);
     --surface-950: rgb(10 10 10);
 
-    --secondary-50: #ecebf9;
-    --secondary-100: #d9d7f4;
-    --secondary-200: #b2afe9;
-    --secondary-300: #8c88dd;
-    --secondary-400: #6660d2;
-    --secondary-500: #3f38c7;
-    --secondary-600: #332d9f;
-    --secondary-700: #262277;
-    --secondary-800: #191650;
-    --secondary-900: #0d0b28;
-    --secondary-950: #060614;
-
     --primary-50: #e8fcf6;
     --primary-100: #d1faee;
     --primary-200: #a3f5dc;
@@ -75,6 +52,11 @@
     --primary-950: #031711;
 }
 
+::-webkit-scrollbar { @apply h-2 w-2; }
+::-webkit-scrollbar-track { @apply bg-transparent; }
+::-webkit-scrollbar-thumb { @apply bg-surface-500 rounded; }
+::-webkit-scrollbar-thumb:hover { @apply bg-primary-500 }
+
 * { @apply font-mono outline-none; }
 
 .heading-anchor { @apply relative no-underline after:content-["#"]; }
@@ -87,15 +69,14 @@ section.footnotes { @apply mt-40 border-t-[1px] border-surface-500; }
 .animate-offscreen-up { @apply transform -translate-y-full pointer-events-none; }
 .animate-offscreen-left { @apply transform -translate-x-full pointer-events-none; }
 
-/* Prose */
-
-.prose { @apply prose-neutral }
-.prose-sm { @apply prose-neutral }
-
-/* Themeing */
+.prose { @apply prose-sm md:prose-base prose-neutral }
+.prose p { @apply mb-0 !important }
 
 html.dark .prose { @apply prose-invert }
-html.dark .prose-sm { @apply prose-invert }
+
+.callout { @apply p-6 rounded; }
+.callout-title { @apply gap-4 }
+.callout-icon { @apply gap-4 }
 
 html.dark .astro-code,
 html.dark .astro-code span {

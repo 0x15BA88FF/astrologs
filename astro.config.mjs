@@ -1,20 +1,20 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 
+import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 
 import rehypeSlug from "rehype-slug";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
-import remarkCapitalize from "remark-capitalize";
+import rehypeCallouts from "rehype-callouts";
+import rehypeExternalLinks from "rehype-external-links";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
-
-import react from "@astrojs/react";
 
 export default defineConfig({
     site: "https://0x15ba88ff.github.io",
-    base: "maze",
+    base: "/",
     markdown: {
         shikiConfig: {
             wrap: false,
@@ -24,18 +24,29 @@ export default defineConfig({
             },
         },
         remarkPlugins: [
-            remarkMath,
-            remarkCapitalize,
+            remarkMath
         ],
         rehypePlugins: [
             rehypeSlug,
+            [
+                rehypeExternalLinks,
+                { target: "_blank", rel: ["noopener", "noreferrer"] }
+            ],
             rehypeKatex,
-            rehypeAccessibleEmojis,
+            rehypeCallouts,
             [
                 rehypeAutolinkHeadings,
                 { behavior: "wrap", properties: { className: "heading-anchor" }}
             ],
         ]
     },
-    integrations: [tailwind(), react()]
+    integrations: [
+        react(),
+        tailwind(),
+        sitemap({
+            priority: 1,
+            changefreq: "daily",
+        }),
+    ],
+    experimental: { contentLayer: true }
 });

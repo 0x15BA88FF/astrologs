@@ -1,6 +1,10 @@
+import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
 
+const cssClassesEnum = []
+
 const postCollection = defineCollection({
+    loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/posts" }),
     schema: z.object({
         title: z.string(),
         description: z.string(),
@@ -12,15 +16,16 @@ const postCollection = defineCollection({
             image: z.string(),
             alt: z.string()
         }).optional(),
-        cssclasses: z.array(z.string()).optional()
+        cssclasses: z.array(z.enum(cssClassesEnum)).optional()
     }),
 });
 
 const tagCollection = defineCollection({
+    loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/tags" }),
     schema: z.object({
         title: z.string(),
         description: z.string(),
-        cssclasses: z.array(z.string()).optional()
+        cssclasses: z.array(z.enum(cssClassesEnum)).optional()
     }),
 });
 

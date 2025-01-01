@@ -1,7 +1,7 @@
 ---
 title: "Wednesday"
 description: "nothing here"
-cssclasses: [""]
+cssclasses: []
 ---
 
 You can render LaTeX mathematical expressions using [KaTeX](https://khan.github.io/KaTeX/):

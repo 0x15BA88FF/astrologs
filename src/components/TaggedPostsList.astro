@@ -11,7 +11,7 @@ const posts = await getCollection("posts", ({ data }) => data.tags?.includes(tag
 <ul class="flex flex-col mt-4">
     {posts.length > 0? posts.slice(0, max).map(post => (
         <li class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 rounded hover:bg-surface-800">
-            <a href={`/maze/posts/${post.slug}`} class="md:max-w-8/12 text-lg font-bold truncate">
+            <a href={`/posts/${post.slug}`} class="md:max-w-8/12 text-lg font-bold truncate">
                 {post.data.title}
             </a>
             <div class="flex gap-2 overflow-hidden">
