@@ -4,15 +4,15 @@ import { getCollection, getEntryBySlug } from "astro:content";
 import ContentLayout from "@/layouts/ContentLayout.astro";
 import TaggedPostsList from "@/components/TaggedPostsList.astro";
 
-const allPosts = Object.values(import.meta.glob('@/content/posts/*.md', { eager: true }));
-const tags = [...new Set(allPosts.map((post: any) => post.frontmatter.tags).flat())];
+const posts = await getCollection("posts");
+const tags = [...new Set(posts.map((post: any) => post.data.tags).flat())];
 
-const tagDetailsPromises = tags.map(async tag => {
-    const tagDetails = await getEntryBySlug("tags", tag);
+const tagDetailsPromises = tags.map(async slug => {
+    const tagDetails = await getEntryBySlug("tags", slug);
 
     return {
-        slug: tag,
-        title: tagDetails?.data.title || tag,
+        slug: slug,
+        title: tagDetails?.data.title || slug,
         description: tagDetails?.data.description || ""
     };
 });
@@ -23,7 +23,7 @@ const tagsWithDetails = await Promise.all(tagDetailsPromises);
 <ContentLayout title="Tags: All | 0x15BA88FF Logs">
     <h1 class="text-2xl md:text-4xl font-bold">Tag Index</h1>
     <ul class="my-8">
-        {tagsWithDetails.map(tag => (
+        {tagsWithDetails.length > 0 ? tagsWithDetails.map(tag => (
             <hr class="my-4 border-surface-500"/>
             <li class="py-4">
                 <div class="flex items-end justify-between mb-4">
@@ -33,6 +33,10 @@ const tagsWithDetails = await Promise.all(tagDetailsPromises);
                 <p>{tag.description}</p>
                 <TaggedPostsList tag={tag.slug} max={10} />
             </li>
-        ))}
+        )) : (
+            <li>
+                <p class="mb-4 p-8 font-bold text-center">No Posts Found.</p>
+            </li>
+        )}
     </ul>
 </ContentLayout>
