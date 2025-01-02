@@ -1,8 +1,10 @@
 ---
-import { Github, Twitter, Linkedin, Mail, Link, Rss } from "lucide-react";
+import { Github, Twitter, Linkedin, Mail, Link, Rss, ChevronUp } from "lucide-react";
 
 const year = new Date().getFullYear();
 ---
+
+
 
 <footer class="flex flex-col gap-4">
     <hr class="mt-4 border-surface-500"/>
@@ -14,7 +16,28 @@ const year = new Date().getFullYear();
             <a href="https://x.com/0x15BA88FF" class="p-4 rounded hover:bg-surface-800 hover:text-primary-500"><Twitter /></a>
             <a href="mailto:15ba88+hello@proton.me" class="p-4 rounded hover:bg-surface-800 hover:text-primary-500"><Mail /></a>
             <div class="flex-grow" />
-            <a href="/logs/rss.xml" target="_blank" rel="noopener noreferrer" class="p-4 rounded hover:bg-surface-800 hover:text-primary-500"><Rss /></a>
+                <a href="/logs/rss.xml" target="_blank" rel="noopener noreferrer" class="p-4 rounded hover:bg-surface-800 hover:text-primary-500"><Rss /></a>
+            </div>
         </div>
-    </div>
+        <button id="scrollToTopButton" class="fixed bottom-0 right-0 right-8 m-8 p-2 rounded-full bg-surface-800 shadow-lg transition-transform translate-y-[200%]">
+            <ChevronUp />
+        </button>
 </footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const scrollToTopButton = document.getElementById("scrollToTopButton");
+        const scrollToTop = _ => window.scrollTo({ top: 0, behavior: "smooth" });
+
+        scrollToTopButton.addEventListener("click", scrollToTop);
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 200) {
+                scrollToTopButton.classList.remove("translate-y-[200%]");
+            } else {
+                scrollToTopButton.classList.remove("translate-y-[200%]");
+                scrollToTopButton.classList.add("translate-y-[200%]");
+            }
+        });
+    });
+</script>
