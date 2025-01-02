@@ -3,7 +3,6 @@ import moment from "moment";
 import { getCollection, getEntryBySlug } from "astro:content";
 
 import BlogLayout from "@/layouts/BlogLayout.astro";
-
 import { Clock, Clock5 } from "lucide-react";
 import Badge from "@/components/Badge.astro";
 
@@ -16,11 +15,18 @@ const { slug } = Astro.params;
 const post = await getEntryBySlug("posts", slug);
 const { Content } = await post.render();
 
-const dateCreated = moment(post.data.date_created, "YYYY-MM-DD HH:mm");
-const dateModified = moment(post.data.date_modified, "YYYY-MM-DD HH:mm");
+const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
 
-const formatDateCreated = dateCreated.format("DD/MM/YYYY HH:mm");
-const formatDateModified = dateModified.format("DD/MM/YYYY HH:mm");
+    return `${day}/${month}/${year} ${hours}:${minutes}`;
+}
+
+const formatDateCreated = formatDate(new Date(post.data.date_created));
+const formatDateModified = formatDate(new Date(post.data.date_modified));
 ---
 
 <BlogLayout title={`${post.data.title} | 0x15BA88FF Logs`} cssclasses={post.data.cssclasses}>
@@ -28,8 +34,8 @@ const formatDateModified = dateModified.format("DD/MM/YYYY HH:mm");
         {post.data.banner?.image &&
             <img src={post.data.banner.image} alt={post.data.banner.alt} class="aspect-[2.9] mb-4 rounded-2xl" />
         }
-        <h1 class="mb-4 text-2xl md:text-4xl font-bold">{post.data.title}</h1>
-        <p class="mt-4">{post.data.description}</p>
+        <h1 class="my-4 text-2xl md:text-4xl font-bold">{post.data.title}</h1>
+        <p>{post.data.description}</p>
         <table class="my-4 w-full">
             <tbody>
                 <tr>
@@ -51,7 +57,7 @@ const formatDateModified = dateModified.format("DD/MM/YYYY HH:mm");
             )}
         </div>
     </div>
-    <div class="min-w-full w-full mt-8 prose">
+    <div class="mt-8 prose">
         <Content />
     </div>
 </BlogLayout>
