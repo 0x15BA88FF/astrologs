@@ -5,8 +5,8 @@ import ContentLayout from "@/layouts/ContentLayout.astro";
 import TaggedPostsList from "@/components/TaggedPostsList.astro";
 
 export async function getStaticPaths() {
-    const allPosts = Object.values(import.meta.glob('@/content/posts/*.md', { eager: true }));
-    const tags = [...new Set(allPosts.map((post: any) => post.frontmatter.tags).flat())];
+    const posts = await getCollection("posts");
+    const tags = [...new Set(posts.map((post: any) => post.data.tags).flat())];
     return tags.map(tag => ({ params: { slug: tag } }));
 }
 
@@ -26,11 +26,9 @@ const tag = {
     <h1 class="text-2xl md:text-4xl font-bold">{tag.title}</h1>
     <p class="mt-4">{tag.description}</p>
     {Content &&
-        <hr class="mt-8 border-surface-500"/>
-        <div class="pt-8 prose">
-            <Content />
-        </div>
+        <hr class="my-8 border-surface-500"/>
+        <div class="prose"><Content /></div>
     }
-    <hr class="mt-8 border-surface-500"/>
+    <hr class="my-8 border-surface-500"/>
     <TaggedPostsList tag={tag.slug} />
 </ContentLayout>
