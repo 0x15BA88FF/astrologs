@@ -63,25 +63,27 @@
 .heading-anchor::after { @apply absolute -right-8 text-transparent; }
 .heading-anchor:hover::after { @apply text-primary-500 cursor-pointer; }
 
-section.footnotes { @apply mt-40 border-t-[1px] border-surface-500; }
+section.footnotes { @apply mt-8 border-t-[1px] border-surface-500; }
 
 .animate-fade-out { @apply opacity-0 pointer-events-none; }
 .animate-offscreen-up { @apply transform -translate-y-full pointer-events-none; }
 .animate-offscreen-left { @apply transform -translate-x-full pointer-events-none; }
 
 .prose { @apply prose-sm md:prose-base prose-neutral }
-.prose p { @apply mb-0 !important }
-
 html.dark .prose { @apply prose-invert }
+
+.prose code { @apply px-1 bg-surface-800 before:content-[""] after:content-[""] rounded-md; }
+.prose p { @apply mb-0 !important }
 
 .callout { @apply p-6 rounded; }
 .callout-title { @apply gap-4 }
-.callout-icon { @apply gap-4 }
 
-html.dark .astro-code,
-html.dark .astro-code span {
+.astro-code { background-color: var(--shiki-dark-bg) !important; }
+.astro-code span { @apply text-sm; }
+.astro-code code { @apply bg-transparent; }
+
+html:dark .astro-code span {
     color: var(--shiki-dark) !important;
-    background-color: var(--shiki-dark-bg) !important;
     font-style: var(--shiki-dark-font-style) !important;
     font-weight: var(--shiki-dark-font-weight) !important;
     text-decoration: var(--shiki-dark-text-decoration) !important;
