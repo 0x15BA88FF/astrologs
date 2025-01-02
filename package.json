@@ -5,9 +5,9 @@
     "scripts": {
         "astro": "astro",
         "sync": "astro sync",
+        "dev": "astro dev",
         "check": "astro check",
         "build": "astro build",
-        "dev": "astro dev --open",
         "preview": "astro preview"
     },
     "dependencies": {
