@@ -1,19 +1,16 @@
 ---
-title: "Test Blog 01"
-description: "nothing here"
-tags: ["daily", "wednesday", "other", "forth"]
-date_created: "2024-12-21 15:30"
-date_modified: "2024-12-16 02:34"
+title: "Test Blog"
+description: "A test blog post for testing my blog"
+tags: ["development"]
+date_created: "2024-12-21T15:30Z"
+date_modified: "2024-12-16T02:34Z"
 draft: true
 banner:
     image: "https://cdn.dribbble.com/userupload/11507678/file/original-38d357eb2ae02b62d300c9fdb10769fa.jpg?resize=1600x543&vertical=center"
     alt: "Cyber Security"
-cssclasses: []
-# layout: "MarkdownPostLayout"
 ---
-# This is a Heading h1
 
-<marque>Hello world</marque>
+# This is a Heading h1
 
 ## this is a Heading h2
 
@@ -23,17 +20,18 @@ cssclasses: []
 
 ##### This is a Heading h5
 
-###### This is a relatively long Heading h6
+###### This is a Heading h6
 
-🎉
-Press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy text.
+A short paragraph
+
+🎉 Press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy text.
 
 ## Empasis
 
-*This text will be italic*  
+*This text will be italic*
 _This will also be italic_
 
-**This text will be bold**  
+**This text will be bold**
 __This will also be bold__
 
 _You **can** combine them_ or ***Like This***
@@ -80,13 +78,20 @@ www.example.com, https://example.com, and contact@example.com.
 > Markdown is a lightweight markup language with plain-text-formatting syntax, created in 2004 by John Gruber with Aaron Swartz.
 > > Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
 
-> [!note] This is a _non-collapsible_ callout
->
-> Some content is displayed directly!
+> [!note] This is a note callout
 > Some content is displayed directly!
 
-> [!WARNING]- This is a **collapsible** callout
-> Some content shown after opening!
+> [!WARNING] This is a warning callout
+> Some content is displayed directly!
+
+> [!HINT] This is a hit callout
+> Some content is displayed directly!
+
+> [!BUG] This is a bug callout
+> Some content is displayed directly!
+
+> [!ERROR] This is a error callout
+> Some content is displayed directly!
 
 ## Tables
 
@@ -233,8 +238,3 @@ $$
 
 > You can find more information about **LaTeX** mathematical expressions [here](http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference).
 
-lorem␠␠
-ipsum
-
-lorem\
-ipsum
