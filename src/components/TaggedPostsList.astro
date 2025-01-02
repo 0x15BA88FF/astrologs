@@ -5,6 +5,7 @@ import PostCard from "@/components/PostCard.astro";
 
 const { tag, max } = Astro.props;
 const posts = await getCollection("posts", ({ data }) => data.tags?.includes(tag));
+posts.sort((a, b) => new Date(b.data.date_created) - new Date(a.data.date_created));
 ---
 
 <ul class="flex flex-col mt-4">
