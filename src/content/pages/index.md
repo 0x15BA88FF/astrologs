@@ -12,4 +12,4 @@ activities like eating food.
 I've worked on—and am still working on—some cool projects you might have heard
 of, like [Password Daemon](https://github.com/0x15BA88FF/passd) and [Devault](https://github.com/0x15BA88FF/devault).
 
-`curl donut.rustychads.com`
+`curl bad-apple.rustychads.com`
