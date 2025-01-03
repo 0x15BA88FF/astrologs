@@ -8,9 +8,9 @@ const { title, cssclasses } = Astro.props;
 ---
 
 <BaseLayout title={title} cssclasses={cssclasses}>
-    <div class="w-full max-w-2xl flex-grow mx-auto px-4">
+    <div class="h-screen mx-auto px-4">
         <Header />
-        <section class="min-h-screen p-2">
+        <section class="h-full p-2">
             <slot />
         </section>
         <Footer />

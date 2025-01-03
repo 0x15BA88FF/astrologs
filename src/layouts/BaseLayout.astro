@@ -19,11 +19,10 @@ const { title, cssclasses } = Astro.props;
         <title>{title}</title>
         <!--<ClientRouter />-->
     </head>
-    <body class={`flex text-surface-50 bg-surface-900 overflow-y-scroll ${cssclasses}`}">
+    <body class={`flex text-surface-50 bg-surface-900 overflow-y-scroll ${cssclasses ? cssclasses : ""}`}>
         <SearchModal client:visible />
         <slot />
     </body>
-
     <script>
         import "@/scripts/controlTheme.js";
         import "@/scripts/controlSearchModal.js";

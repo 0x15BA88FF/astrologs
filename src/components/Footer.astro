@@ -4,22 +4,24 @@ import { Github, Twitter, Linkedin, Mail, Link, Rss, ChevronUp } from "lucide-re
 const year = new Date().getFullYear();
 ---
 
+<button id="scrollToTopButton" class="sticky bottom-8 left-full p-2 rounded-full bg-surface-800 shadow-lg transition-transform translate-y-[200%]">
+    <ChevronUp />
+</button>
+
 <footer class="flex flex-col gap-4">
     <hr class="mt-4 border-surface-500"/>
     <div class="flex flex-col gap-4 py-8">
         <p>Copyright &copy; {year}</p>
-        <div class="flex flex-wrap">
-            <a href="https://github.com/0x15BA88FF" class="p-4 rounded hover:bg-surface-800 hover:text-primary-500"><Github /></a>
-            <a href="https://www.linkedin.com/in/0x15ba88ff/" class="p-4 rounded hover:bg-surface-800 hover:text-primary-500"><Linkedin /></a>
-            <a href="https://x.com/0x15BA88FF" class="p-4 rounded hover:bg-surface-800 hover:text-primary-500"><Twitter /></a>
-            <a href="mailto:15ba88+hello@proton.me" class="p-4 rounded hover:bg-surface-800 hover:text-primary-500"><Mail /></a>
-            <div class="flex-grow" />
-                <a href="/logs/rss.xml" target="_blank" rel="noopener noreferrer" class="p-4 rounded hover:bg-surface-800 hover:text-primary-500"><Rss /></a>
+        <div class="flex justify-between">
+            <div class="flex flex-wrap">
+                <a href="https://github.com/0x15BA88FF" class="p-4 rounded hover:bg-surface-800 hover:text-primary-500"><Github /></a>
+                <a href="https://www.linkedin.com/in/0x15ba88ff/" class="p-4 rounded hover:bg-surface-800 hover:text-primary-500"><Linkedin /></a>
+                <a href="https://x.com/0x15BA88FF" class="p-4 rounded hover:bg-surface-800 hover:text-primary-500"><Twitter /></a>
+                <a href="mailto:15ba88+hello@proton.me" class="p-4 rounded hover:bg-surface-800 hover:text-primary-500"><Mail /></a>
             </div>
+            <a href="/logs/rss.xml" target="_blank" rel="noopener noreferrer" class="p-4 rounded hover:bg-surface-800 hover:text-primary-500"><Rss /></a>
         </div>
-        <button id="scrollToTopButton" class="fixed bottom-0 right-0 right-8 m-8 p-2 rounded-full bg-surface-800 shadow-lg transition-transform translate-y-[200%]">
-            <ChevronUp />
-        </button>
+    </div>
 </footer>
 
 <script>

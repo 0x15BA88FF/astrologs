@@ -69,7 +69,7 @@ section.footnotes { @apply mt-8 border-t-[1px] border-surface-500; }
 .animate-offscreen-up { @apply transform -translate-y-full pointer-events-none; }
 .animate-offscreen-left { @apply transform -translate-x-full pointer-events-none; }
 
-.prose { @apply prose-sm md:prose-base prose-neutral }
+.prose { @apply max-w-full prose-sm md:prose-base prose-neutral }
 html.dark .prose { @apply prose-invert }
 
 .prose code { @apply px-1 bg-surface-800 before:content-[""] after:content-[""] rounded-md; }
